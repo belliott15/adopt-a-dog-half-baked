@@ -24,11 +24,11 @@ export async function getDog(id) {
     return checkError(response);    
 }
 
-export async function searchDogs(name){
+export async function searchDogs(inputed){
     const response = await client
         .from('dogs')
         .select('*')
-        .eq('name', name)
+        .or(`name.eq.${inputed}, breed.eq.${inputed}`)
         .single();
 
     return checkError(response);
